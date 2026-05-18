@@ -185,6 +185,7 @@ input.bfi{-moz-appearance:textfield;}input.bfi::-webkit-inner-spin-button,input.
         <button class="btn bp bsm" onclick="openM()">+ Додати</button>
       </div>
       <div id="wPlan" style="display:none;margin-bottom:12px;background:var(--s2);border-radius:8px;padding:10px;font-size:12px;"></div>
+      <div id="wList"></div>
     </div>
   </div>
 </div>
@@ -273,7 +274,7 @@ const CV=[{id:'ast_usd',n:'💵 Долар'},{id:'ast_eur',n:'💶 Євро'},{i
 const INV_MAP={ast_usd:'usd',ast_eur:'eur',ast_ovdp:'ovdp',ast_dep:'deposit'};
 const INC_MAP={inc_usd:'usd',inc_eur:'eur',inc_ovdp:'ovdp',inc_dep:'deposit'};
 const AN={usd:'💵 Долар',eur:'💶 Євро',ovdp:'📄 ОВДП',deposit:'🏛 Депозит'};
-const MUA=['Січень','Лютий','Березень','Квітень','Травень','Червень','Липень','Серпень','Вересень','Жовтень','Листопад','Грудень'];
+const MUA=['Січень','Лютий','Березень','Квітень','Травень','Червень','Люпень','Серпень','Вересень','Жовтень','Листопад','Грудень'];
 const DUA=['Пн','Вт','Ср','Чт','Пт','Сб','Нд'];
 
 // ═══ STATE ═══
@@ -281,7 +282,7 @@ let dY=new Date().getFullYear(),dM=new Date().getMonth();
 let bY=new Date().getFullYear(),bM=new Date().getMonth();
 let wOff=0,wDay=null,anPer=1,wpOpen=false;
 let chBal,chIE,chPie,chAst;
-let globalBudgetCache = []; // Клієнтський кеш для безпечного UPSERT без затирання полів
+let globalBudgetCache = [];
 
 // ═══ API ═══
 async function api(path,o={}){
@@ -329,7 +330,6 @@ function go(name){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
   document.getElementById('pg-'+name).classList.add('on');
   document.querySelectorAll('.tab').forEach(t=>{if(t.getAttribute('onclick')?.includes(`'${name}'`))t.classList.add('on');});
-  currentPage = name;
   ({dash:loadDash,journal:initJournal,budget:()=>{updBLbl();loadBud();},week:()=>{updWLbl();loadWeek();},assets:loadAssets,analytics:loadAnalytics})[name]?.();
 }
 function sync(ok){const el=document.getElementById('appTitle');if(el)el.className='logo-t '+(ok?'ok':'err');}
@@ -527,12 +527,12 @@ async function loadBud(){
   try{
     const y=bY,m=bM+1; const moStr=`${y}-${p2(m)}`;
     const[bud,txs]=await Promise.all([getBud(y,m),getTx({month:moStr})]);
-    globalBudgetCache = bud; // Зберігаємо у кеш для безпомилкового редагування рядків
+    globalBudgetCache = bud;
     
     const iF=txs.filter(t=>t.type==='income').reduce((s,t)=>s+nu(t.amount),0);
     const iP=np(bud,'inc_plan') || 0;
     
-    let html=`<table><thead><tr><th>Категорія</th><th>План ₴</th><th>Дата платежу</th><th>Факт ₴</th><th>Різниця</th><th>%</th></tr></thead><tbody>`;
+    let html=`<table><thead><tr><th>Категорія</th><th>План ₴</th><th>Дата платежу</th><th>Fact ₴</th><th>Різниця</th><th>%</th></tr></thead><tbody>`;
     const getTargetDate = (catId) => {
        const item = bud.find(b=>b.category_id===catId);
        return item ? (item.payment_date || '') : '';
@@ -576,7 +576,7 @@ async function loadBud(){
         <td><input class="fi" style="width:125px;" type="date" value="${getTargetDate(c.id)}" onchange="saveBud(${y},${m},'${c.id}','payment_date',this.value)"></td>
         <td style="font-weight:700;color:${ov?'var(--rd)':'var(--tx)'};">${fa>0?f(fa):'—'}</td>
         <td style="color:${diff>=0?'var(--ac)':'var(--rd)'};">${diffHtml}</td>
-        <td>${pct!=='?`<span class="badge ${ov?'br':'bb'}">${pct}%</span>`:'—'}</td></tr>`;
+        <td>${pct!==''?`<span class="badge ${ov?'br':'bb'}">${pct}%</span>`:'—'}</td></tr>`;
     }
     
     let tDiffHtml = '';
@@ -591,7 +591,6 @@ async function loadBud(){
 
 async function saveBud(y,m,catId,field,val){
   try{
-    // Безпечне оновлення з локального кешу без затирання інших колонок
     const ex = globalBudgetCache.find(b => b.category_id === catId) || {};
     
     let targetPlan = ex.plan !== undefined ? nu(ex.plan) : 0;
@@ -612,14 +611,12 @@ async function saveBud(y,m,catId,field,val){
       fact: ex.fact !== undefined ? nu(ex.fact) : 0
     };
     
-    // Якщо у рядка є первинний ID з бази даних, підставляємо його, щоб Supabase виконав чистий UPDATE
     if (ex.id) {
       payload.id = ex.id;
     }
     
     await upsertBud(payload);
     
-    // Оновлюємо локальний кеш, щоб наступні зміни цього ж поля не конфліктували
     const cacheIdx = globalBudgetCache.findIndex(b => b.category_id === catId);
     if (cacheIdx !== -1) {
       globalBudgetCache[cacheIdx].plan = targetPlan;
