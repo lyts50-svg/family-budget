@@ -153,7 +153,7 @@ input.bfi{-moz-appearance:textfield;}input.bfi::-webkit-inner-spin-button,input.
     </div>
     <div style="padding:9px 14px;border-bottom:1px solid var(--bd);display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
       <select class="fi" style="width:auto;" id="fCat" onchange="loadTx()"><option value="">Всі категорії</option></select>
-      <select class="fi" style="width:auto;" id="fType" onchange="loadTx()"><option value="">Всі типу</option><option value="expense">Витрата</option><option value="income">Дохід</option><option value="invest">Інвестиції</option></select>
+      <select class="fi" style="width:auto;" id="fType" onchange="loadTx()"><option value="">Всі типи</option><option value="expense">Витрата</option><option value="income">Дохід</option><option value="invest">Інвестиції</option></select>
       <input type="month" id="fMonth" class="fi" style="width:auto;" onchange="loadTx()">
       <button class="btn bs bsm" onclick="clrF()">Скинути</button>
       <span id="txTot" style="margin-left:auto;font-weight:700;color:var(--rd);font-size:12px;"></span>
@@ -281,6 +281,7 @@ let dY=new Date().getFullYear(),dM=new Date().getMonth();
 let bY=new Date().getFullYear(),bM=new Date().getMonth();
 let wOff=0,wDay=null,anPer=1,wpOpen=false;
 let chBal,chIE,chPie,chAst;
+let globalBudgetCache = []; // Клієнтський кеш для безпечного UPSERT без затирання полів
 
 // ═══ API ═══
 async function api(path,o={}){
@@ -328,6 +329,7 @@ function go(name){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
   document.getElementById('pg-'+name).classList.add('on');
   document.querySelectorAll('.tab').forEach(t=>{if(t.getAttribute('onclick')?.includes(`'${name}'`))t.classList.add('on');});
+  currentPage = name;
   ({dash:loadDash,journal:initJournal,budget:()=>{updBLbl();loadBud();},week:()=>{updWLbl();loadWeek();},assets:loadAssets,analytics:loadAnalytics})[name]?.();
 }
 function sync(ok){const el=document.getElementById('appTitle');if(el)el.className='logo-t '+(ok?'ok':'err');}
@@ -525,11 +527,12 @@ async function loadBud(){
   try{
     const y=bY,m=bM+1; const moStr=`${y}-${p2(m)}`;
     const[bud,txs]=await Promise.all([getBud(y,m),getTx({month:moStr})]);
+    globalBudgetCache = bud; // Зберігаємо у кеш для безпомилкового редагування рядків
     
     const iF=txs.filter(t=>t.type==='income').reduce((s,t)=>s+nu(t.amount),0);
     const iP=np(bud,'inc_plan') || 0;
     
-    let html=`<table><thead><tr><th>Категорія</th><th>План ₴</th><th>Дата платежу</th><th>Fact ₴</th><th>Різниця</th><th>%</th></tr></thead><tbody>`;
+    let html=`<table><thead><tr><th>Категорія</th><th>План ₴</th><th>Дата платежу</th><th>Факт ₴</th><th>Різниця</th><th>%</th></tr></thead><tbody>`;
     const getTargetDate = (catId) => {
        const item = bud.find(b=>b.category_id===catId);
        return item ? (item.payment_date || '') : '';
@@ -542,14 +545,13 @@ async function loadBud(){
     }
     
     html+=`<tr><td>💰 Дохід</td>
-      <td><input class="fi bfi" style="width:90px;" type="number" min="0" value="${iP>0?iP:''}" placeholder="0" onblur="saveBud(${y},${m},'inc_plan','plan',this.value)"></td>
+      <td><input class="fi bfi" style="width:90px;" type="number" min="0" value="${iP>0?iP:''}" placeholder="0" onchange="saveBud(${y},${m},'inc_plan','plan',this.value)"></td>
       <td><input class="fi" style="width:125px;" type="date" value="${getTargetDate('inc_plan')}" onchange="saveBud(${y},${m},'inc_plan','payment_date',this.value)"></td>
       <td style="font-weight:700;color:var(--ac);">${iF>0?f(iF):'—'}</td>
       <td style="color:${iF>=iP&&iP>0?'var(--ac)':'var(--rd)'};">${iDiffHtml}</td>
       <td>—</td></tr>`;
       
     let tp=0,tf=0;
-    // Render standard Expenses AND Investments
     const combinedCats = [...CE, ...CV];
     
     for(const c of combinedCats){
@@ -562,7 +564,6 @@ async function loadBud(){
       const ov = p > 0 && fa > p;
       const diff = p - fa;
       
-      // Calculate % properly across all fields
       const pct = p > 0 ? Math.round((fa/p)*100) : '';
       
       let diffHtml = '—';
@@ -571,11 +572,11 @@ async function loadBud(){
       }
       
       html+=`<tr><td>${c.n}</td>
-        <td><input class="fi bfi" style="width:90px;" type="number" min="0" value="${p>0?p:''}" placeholder="0" onblur="saveBud(${y},${m},'${c.id}','plan',this.value)"></td>
+        <td><input class="fi bfi" style="width:90px;" type="number" min="0" value="${p>0?p:''}" placeholder="0" onchange="saveBud(${y},${m},'${c.id}','plan',this.value)"></td>
         <td><input class="fi" style="width:125px;" type="date" value="${getTargetDate(c.id)}" onchange="saveBud(${y},${m},'${c.id}','payment_date',this.value)"></td>
         <td style="font-weight:700;color:${ov?'var(--rd)':'var(--tx)'};">${fa>0?f(fa):'—'}</td>
         <td style="color:${diff>=0?'var(--ac)':'var(--rd)'};">${diffHtml}</td>
-        <td>${pct!==''?`<span class="badge ${ov?'br':'bb'}">${pct}%</span>`:'—'}</td></tr>`;
+        <td>${pct!=='?`<span class="badge ${ov?'br':'bb'}">${pct}%</span>`:'—'}</td></tr>`;
     }
     
     let tDiffHtml = '';
@@ -590,15 +591,43 @@ async function loadBud(){
 
 async function saveBud(y,m,catId,field,val){
   try{
-    const bud=await getBud(y,m);
-    const ex=bud.find(b=>b.category_id===catId)||{};
+    // Безпечне оновлення з локального кешу без затирання інших колонок
+    const ex = globalBudgetCache.find(b => b.category_id === catId) || {};
+    
+    let targetPlan = ex.plan !== undefined ? nu(ex.plan) : 0;
+    let targetDate = ex.payment_date !== undefined ? ex.payment_date : null;
+    
+    if (field === 'plan') {
+      targetPlan = val === '' ? 0 : nu(val);
+    } else if (field === 'payment_date') {
+      targetDate = val || null;
+    }
+    
     let payload = {
-      year: y, month: m, category_id: catId,
-      plan: field === 'plan' ? (val===''?0:nu(val)) : (ex.plan===undefined?0:nu(ex.plan)),
-      payment_date: field === 'payment_date' ? (val || null) : (ex.payment_date || null),
-      fact: 0
+      year: y,
+      month: m,
+      category_id: catId,
+      plan: targetPlan,
+      payment_date: targetDate,
+      fact: ex.fact !== undefined ? nu(ex.fact) : 0
     };
+    
+    // Якщо у рядка є первинний ID з бази даних, підставляємо його, щоб Supabase виконав чистий UPDATE
+    if (ex.id) {
+      payload.id = ex.id;
+    }
+    
     await upsertBud(payload);
+    
+    // Оновлюємо локальний кеш, щоб наступні зміни цього ж поля не конфліктували
+    const cacheIdx = globalBudgetCache.findIndex(b => b.category_id === catId);
+    if (cacheIdx !== -1) {
+      globalBudgetCache[cacheIdx].plan = targetPlan;
+      globalBudgetCache[cacheIdx].payment_date = targetDate;
+    } else {
+      globalBudgetCache.push(payload);
+    }
+    
     sync(true);
   }catch(e){toast('Помилка збереження','fail');}
 }
@@ -653,7 +682,6 @@ function renderWeekList(){
   let catsHtml = '';
   
   if (wDay) {
-     // Individual Targeted Date: Strict mapping filter
      catsHtml = combinedCats.map(c=>{
         const mp=np(_wBud,c.id) || 0;
         const budRow = _wBud.find(b=>b.category_id===c.id);
@@ -666,7 +694,6 @@ function renderWeekList(){
         return `<div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--bd)22;"><span>${c.n}</span><span>план: ${f(wp)} / <strong style="color:${cf>wp&&wp?'var(--rd)':'var(--ac)'};">${f(cf)}</strong></span></div>`;
      }).join('');
   } else {
-     // Week Total Overview: show plan vs fact according to dates matching this specific week period
      catsHtml = combinedCats.map(c=>{
         const mp=np(_wBud,c.id) || 0;
         const budRow = _wBud.find(b=>b.category_id===c.id);
