@@ -133,12 +133,12 @@ tfoot tr td{background:var(--s2);font-weight:700;border-top:2px solid var(--bd);
     <div><div class="logo-t ok" id="appTitle">Family Budget</div></div>
   </div>
   <div class="nav-tabs">
-    <button class="tab on" onclick="go('dash')">?? Дашборд</button>
-    <button class="tab" onclick="go('journal')">?? Журнал</button>
-    <button class="tab" onclick="go('budget')">?? Бюджет</button>
-    <button class="tab" onclick="go('week')">?? Тиждень</button>
-    <button class="tab" onclick="go('assets')">?? Активи</button>
-    <button class="tab" onclick="go('analytics')">?? Аналітика</button>
+    <button class="tab on" onclick="go('dash')">📊 Дашборд</button>
+    <button class="tab" onclick="go('journal')">📓 Журнал</button>
+    <button class="tab" onclick="go('budget')">📅 Бюджет</button>
+    <button class="tab" onclick="go('week')">📆 Тиждень</button>
+    <button class="tab" onclick="go('assets')">🏦 Активи</button>
+    <button class="tab" onclick="go('analytics')">📈 Аналітика</button>
   </div>
 </nav>
 <div class="main">
@@ -148,25 +148,25 @@ tfoot tr td{background:var(--s2);font-weight:700;border-top:2px solid var(--bd);
   <div class="g2">
     <div class="sec">
       <div class="sh">
-        <div class="st">?? Витрати по категоріях</div>
+        <div class="st">📊 Витрати по категоріях</div>
         <div class="mnav"><button onclick="dMo(-1)">‹</button><span id="dMLbl"></span><button onclick="dMo(1)">›</button></div>
       </div>
       <div class="sb" id="dCats"><div class="ldr"><div class="spin"></div></div></div>
     </div>
     <div class="sec">
-      <div class="sh"><div class="st">?? Баланс по місяцях</div></div>
+      <div class="sh"><div class="st">📈 Баланс по місяцях</div></div>
       <div class="sb"><div class="cw"><canvas id="cBal"></canvas></div></div>
     </div>
   </div>
   <div class="sec">
-    <div class="sh"><div class="st">?? Останні записи</div><button class="btn bs bsm" onclick="go('journal')">Всі ?</button></div>
+    <div class="sh"><div class="st">🕐 Останні записи</div><button class="btn bs bsm" onclick="go('journal')">Всі →</button></div>
     <div class="tw" id="dRecent"><div class="ldr"><div class="spin"></div></div></div>
   </div>
 </div>
 
 <div id="pg-journal" class="page">
   <div class="sec">
-    <div class="sh"><div class="st">?? Журнал доходів та витрат</div><button class="btn bp" onclick="openM()">+ Додати запис</button></div>
+    <div class="sh"><div class="st">📓 Журнал доходів та витрат</div><button class="btn bp" onclick="openM()">+ Додати запис</button></div>
     <div class="sb" style="border-bottom:1px solid var(--bd);">
       <div class="fr">
         <div class="fg"><label class="fl">Дата</label><input type="date" id="qDate" class="fi"></div>
@@ -180,9 +180,9 @@ tfoot tr td{background:var(--s2);font-weight:700;border-top:2px solid var(--bd);
           </select>
         </div>
         <div class="fg"><label class="fl">Категорія</label><select id="qCat" class="fi"></select></div>
-        <div class="fg"><label class="fl">Сума ?</label><input type="number" id="qAmt" class="fi" placeholder="0" min="0"></div>
+        <div class="fg"><label class="fl">Сума ₴</label><input type="number" id="qAmt" class="fi" placeholder="0" min="0"></div>
         <div class="fg"><label class="fl">Коментар</label><input type="text" id="qNote" class="fi" placeholder="необов'язково"></div>
-        <div class="fg" style="justify-content:flex-end;padding-top:16px;"><button class="btn bp" onclick="qadd()">Зберегти ?</button></div>
+        <div class="fg" style="justify-content:flex-end;padding-top:16px;"><button class="btn bp" onclick="qadd()">Зберегти ↵</button></div>
       </div>
     </div>
     <div style="padding:9px 14px;border-bottom:1px solid var(--bd);display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
@@ -206,7 +206,7 @@ tfoot tr td{background:var(--s2);font-weight:700;border-top:2px solid var(--bd);
 <div id="pg-budget" class="page">
   <div class="sec">
     <div class="sh">
-      <div class="st">?? Бюджет план / факт</div>
+      <div class="st">📅 Бюджет план / факт</div>
       <div class="mnav"><button onclick="bNav(-1)">‹</button><span id="bLbl"></span><button onclick="bNav(1)">›</button></div>
     </div>
     <div class="tw" id="bTbl"><div class="ldr"><div class="spin"></div></div></div>
@@ -216,13 +216,13 @@ tfoot tr td{background:var(--s2);font-weight:700;border-top:2px solid var(--bd);
 <div id="pg-week" class="page">
   <div class="sec">
     <div class="sh">
-      <div class="st">?? Тижневий план та огляд</div>
+      <div class="st">📆 Тижневий план та огляд</div>
       <div class="mnav"><button onclick="wNav(-1)">‹</button><span id="wLbl"></span><button onclick="wNav(1)">›</button></div>
     </div>
     <div class="sb"><div class="wg" id="wGrid"></div></div>
     <div class="sb" style="border-top:1px solid var(--bd);">
       <div class="split" style="margin-bottom:10px;">
-        <button class="btn bs bsm" onclick="togWP()">?? Деталі по категоріях</button>
+        <button class="btn bs bsm" onclick="togWP()">📋 Деталі по категоріях</button>
         <button class="btn bp bsm" onclick="openM()">+ Додати запис</button>
       </div>
       <div id="wPlan" style="display:none;margin-bottom:12px;background:var(--s2);border-radius:8px;padding:12px;font-size:12px;line-height:1.6;"></div>
@@ -239,19 +239,19 @@ tfoot tr td{background:var(--s2);font-weight:700;border-top:2px solid var(--bd);
     <button class="btn bs bsm" onclick="document.getElementById('aFM').value='';loadAssets()">Всі записи</button>
   </div>
   <div class="g2">
-    <div class="sec"><div class="sh"><div class="st">?? Валютні Активи (USD / EUR)</div></div><div id="aUSD"></div></div>
-    <div class="sec"><div class="sh"><div class="st">?? ОВДП Портфель</div></div><div id="aOVDP"></div></div>
+    <div class="sec"><div class="sh"><div class="st">💵 Валютні Активи (USD / EUR)</div></div><div id="aUSD"></div></div>
+    <div class="sec"><div class="sh"><div class="st">📄 ОВДП Портфель</div></div><div id="aOVDP"></div></div>
   </div>
   <div class="g2">
-    <div class="sec"><div class="sh"><div class="st">?? Депозити та Кредити</div></div><div id="aDep"></div></div>
-    <div class="sec"><div class="sh"><div class="st">?? Структура чистих активів</div></div><div class="sb"><div class="cw" style="height:190px;"><canvas id="cAst"></canvas></div></div></div>
+    <div class="sec"><div class="sh"><div class="st">🏛 Депозити та Кредити</div></div><div id="aDep"></div></div>
+    <div class="sec"><div class="sh"><div class="st">📊 Структура чистих активів</div></div><div class="sb"><div class="cw" style="height:190px;"><canvas id="cAst"></canvas></div></div></div>
   </div>
 </div>
 
 <div id="pg-analytics" class="page">
   <div class="sec">
     <div class="sh">
-      <div class="st">?? Аналітика фінансів</div>
+      <div class="st">📈 Аналітика фінансів</div>
       <div class="ptabs" id="anTabs">
         <button class="ptab on" onclick="setPer(1,this)">1М</button>
         <button class="ptab" onclick="setPer(3,this)">3М</button>
@@ -262,19 +262,19 @@ tfoot tr td{background:var(--s2);font-weight:700;border-top:2px solid var(--bd);
     </div>
     <div class="sb"><div class="cards" id="anCards" style="margin-bottom:0;"></div></div>
   </div>
-  <div class="sec mt14"><div class="sh"><div class="st">?? Поточний стан Капіталу та Кредитів</div></div><div class="sb" id="anAst"></div></div>
+  <div class="sec mt14"><div class="sh"><div class="st">🏦 Поточний стан Капіталу та Кредитів</div></div><div class="sb" id="anAst"></div></div>
   <div class="g2 mt14">
-    <div class="sec"><div class="sh"><div class="st">?? Доходи vs Витрати</div></div><div class="sb"><div class="cw"><canvas id="cIE"></canvas></div></div></div>
-    <div class="sec"><div class="sh"><div class="st">?? Структура витрат</div></div><div class="sb"><div class="cw"><canvas id="cPie"></canvas></div></div></div>
+    <div class="sec"><div class="sh"><div class="st">📊 Доходи vs Витрати</div></div><div class="sb"><div class="cw"><canvas id="cIE"></canvas></div></div></div>
+    <div class="sec"><div class="sh"><div class="st">🥧 Структура витрат</div></div><div class="sb"><div class="cw"><canvas id="cPie"></canvas></div></div></div>
   </div>
-  <div class="sec mt14"><div class="sh"><div class="st">?? Топ категорій витрат</div></div><div class="sb" id="anTop"></div></div>
+  <div class="sec mt14"><div class="sh"><div class="st">🏆 Топ категорій витрат</div></div><div class="sb" id="anTop"></div></div>
 </div>
 
 </div>
 
 <div class="ov" id="modal">
   <div class="modal">
-    <div class="mh"><div class="mt2">?? Новий запис</div><button class="mc" onclick="closeM()">?</button></div>
+    <div class="mh"><div class="mt2">📝 Новий запис</div><button class="mc" onclick="closeM()">×</button></div>
     <div class="mb">
       <div class="fg"><label class="fl">Дата</label><input type="date" id="mDate" class="fi"></div>
       <div class="fg"><label class="fl">Тип</label>
@@ -287,7 +287,7 @@ tfoot tr td{background:var(--s2);font-weight:700;border-top:2px solid var(--bd);
         </select>
       </div>
       <div class="fg"><label class="fl">Категорія</label><select id="mCat" class="fi" onchange="mInfo()"></select></div>
-      <div class="fg"><label class="fl">Сума ?</label><input type="number" id="mAmt" class="fi" placeholder="0" min="0"></div>
+      <div class="fg"><label class="fl">Сума ₴</label><input type="number" id="mAmt" class="fi" placeholder="0" min="0"></div>
       <div class="fg"><label class="fl">Коментар</label><input type="text" id="mNote" class="fi" placeholder="необов'язково"></div>
       <div id="mIB" class="ib" style="display:none;"></div>
     </div>
@@ -297,38 +297,38 @@ tfoot tr td{background:var(--s2);font-weight:700;border-top:2px solid var(--bd);
 <div class="toast" id="toast"></div>
 
 <script>
-// ??? CONFIG ???
+// ═══ CONFIG ═══
 const SB='https://hsywahxxysysxtbrcgxr.supabase.co';
 const KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhzeXdhaHh4eXN5c3h0YnJjZ3hyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg5ODU2NjEsImV4cCI6MjA5NDU2MTY2MX0.B0GgaN-9pMSGVvsa4HZwjrMgD0DS2tm2gfOVjrsIUlY';
 
 const CE=[
-  {id:'food',n:'?? Їжа'},{id:'communal',n:'?? Комунальні'},{id:'road',n:'?? Дорога'},
-  {id:'dima',n:'?? Діма'},{id:'mobile',n:'?? Мобільний'},{id:'internet',n:'?? Інтернет+ТБ'},
-  {id:'cat',n:'?? Кіт'},{id:'amway',n:'? Amway'},{id:'tanya',n:'?? Таня'},
-  {id:'holidays',n:'?? Свята/Подорожі'},{id:'health',n:'?? Здоров\'я'},{id:'clothes',n:'?? Одяг'},{id:'other',n:'?? Інші'}
+  {id:'food',n:'🛒 Їжа'},{id:'communal',n:'🏠 Комунальні'},{id:'road',n:'🚗 Дорога'},
+  {id:'dima',n:'👦 Діма'},{id:'mobile',n:'📱 Мобільний'},{id:'internet',n:'🌐 Інтернет+ТБ'},
+  {id:'cat',n:'🐱 Кіт'},{id:'amway',n:'✨ Amway'},{id:'tanya',n:'👩 Таня'},
+  {id:'holidays',n:'🎉 Свята/Подорожі'},{id:'health',n:'💊 Здоров\'я'},{id:'clothes',n:'👕 Одяг'},{id:'other',n:'📦 Інші'}
 ];
 const CI=[
-  {id:'inc_main',n:'?? Основний дохід'},{id:'inc_extra',n:'?? Додатковий дохід'},
-  {id:'inc_usd',n:'?? Долар (продаж)'},{id:'inc_eur',n:'?? Євро (продаж)'},
-  {id:'inc_ovdp',n:'?? ОВДП (погашення)'},{id:'inc_dep',n:'?? Депозит (повернення)'}
+  {id:'inc_main',n:'💰 Основний дохід'},{id:'inc_extra',n:'💵 Додатковий дохід'},
+  {id:'inc_usd',n:'💵 Долар (продаж)'},{id:'inc_eur',n:'💶 Євро (продаж)'},
+  {id:'inc_ovdp',n:'📄 ОВДП (погашення)'},{id:'inc_dep',n:'🏛 Депозит (повернення)'}
 ];
-const CV=[{id:'ast_usd',n:'?? Долар'},{id:'ast_eur',n:'?? Євро'},{id:'ast_ovdp',n:'?? ОВДП'},{id:'ast_dep',n:'?? Депозит'}];
-const CCR=[{id:'ast_credit',n:'?? Кредитна лінія / Борг'}];
+const CV=[{id:'ast_usd',n:'💵 Долар'},{id:'ast_eur',n:'💶 Євро'},{id:'ast_ovdp',n:'📄 ОВДП'},{id:'ast_dep',n:'🏛 Депозит'}];
+const CCR=[{id:'ast_credit',n:'💳 Кредитна лінія / Борг'}];
 
 const INV_MAP={ast_usd:'usd',ast_eur:'eur',ast_ovdp:'ovdp',ast_dep:'deposit'};
 const INC_MAP={inc_usd:'usd',inc_eur:'eur',inc_ovdp:'ovdp',inc_dep:'deposit'};
-const AN={usd:'?? Долар',eur:'?? Євро',ovdp:'?? ОВДП',deposit:'?? Депозит'};
+const AN={usd:'💵 Долар',eur:'💶 Євро',ovdp:'📄 ОВДП',deposit:'🏛 Депозит'};
 const MUA=['Січень','Лютий','Березень','Квітень','Травень','Червень','Липень','Серпень','Вересень','Жовтень','Листопад','Грудень'];
 const DUA=['Пн','Вт','Ср','Чт','Пт','Сб','Нд'];
 
-// ??? STATE ???
+// ═══ STATE ═══
 let dY=new Date().getFullYear(),dM=new Date().getMonth();
 let bY=new Date().getFullYear(),bM=new Date().getMonth();
 let wOff=0,wDay=null,anPer=1,wpOpen=false;
 let chBal,chIE,chPie,chAst;
 let globalBudgetCache = [];
 
-// ??? API ???
+// ═══ API ═══
 async function api(path,o={}){
   sync(false);
   try{
@@ -379,7 +379,7 @@ async function calcCurrentGlobalBalance() {
   return inc - exp;
 }
 
-// ??? NAVIGATION ???
+// ═══ NAVIGATION ═══
 function go(name){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
@@ -389,7 +389,7 @@ function go(name){
 }
 function sync(ok){const el=document.getElementById('appTitle');if(el)el.className='logo-t '+(ok?'ok':'err');}
 
-// ??? DASHBOARD ???
+// ═══ DASHBOARD ═══
 async function loadDash(){updDLbl();await Promise.all([loadDCards(),loadDCats(),loadDRecent(),loadBalChart()]);}
 function updDLbl(){document.getElementById('dMLbl').textContent=MUA[dM]+' '+dY;}
 function dMo(d){const nm=dM+d;if(nm<0){dM=11;dY--;}else if(nm>11){dM=0;dY++;}else dM=nm;updDLbl();loadDash();}
@@ -411,11 +411,11 @@ async function loadDCards(){
 
     const totAst = (astBal.usd + astBal.eur + astBal.ovdp + astBal.deposit) - astBal.credit;
     el.innerHTML=`
-      <div class="card g"><div class="ci">??</div><div class="cl">Дохід ${MUA[dM]}</div><div class="cv g">${f(iF)}</div><div class="cs">${iP?'план: '+f(iP):''}</div></div>
-      <div class="card ${eF>eP&&eP?'r':'b'}"><div class="ci">??</div><div class="cl">Витрати ${MUA[dM]}</div><div class="cv ${eF>eP&&eP?'r':'b'}">${f(eF)}</div><div class="cs">${eP?'план: '+f(eP):''}</div></div>
-      <div class="card o"><div class="ci">??</div><div class="cl">Чисті Активи</div><div class="cv o">${f(totAst)}</div><div class="cs">мінус кредит</div></div>
-      <div class="card b"><div class="ci">??</div><div class="cl">Поточний баланс</div><div class="cv b">${f(globalBalance)}</div><div class="cs">кумулятивно</div></div>
-      <div class="card p"><div class="ci">??</div><div class="cl">Загальний Кредит</div><div class="cv p">${f(astBal.credit)}</div><div class="cs">поточний борг</div></div>`;
+      <div class="card g"><div class="ci">💵</div><div class="cl">Дохід ${MUA[dM]}</div><div class="cv g">${f(iF)}</div><div class="cs">${iP?'план: '+f(iP):''}</div></div>
+      <div class="card ${eF>eP&&eP?'r':'b'}"><div class="ci">📤</div><div class="cl">Витрати ${MUA[dM]}</div><div class="cv ${eF>eP&&eP?'r':'b'}">${f(eF)}</div><div class="cs">${eP?'план: '+f(eP):''}</div></div>
+      <div class="card o"><div class="ci">🏦</div><div class="cl">Чисті Активи</div><div class="cv o">${f(totAst)}</div><div class="cs">мінус кредит</div></div>
+      <div class="card b"><div class="ci">⚖️</div><div class="cl">Поточний баланс</div><div class="cv b">${f(globalBalance)}</div><div class="cs">кумулятивно</div></div>
+      <div class="card p"><div class="ci">💳</div><div class="cl">Загальний Кредит</div><div class="cv p">${f(astBal.credit)}</div><div class="cs">поточний борг</div></div>`;
   }catch(e){el.innerHTML=`<div class="card"><div class="cl" style="color:var(--rd)">Помилка: ${e.message}</div></div>`;}
 }
 
@@ -433,7 +433,7 @@ async function loadDCats(){
       const pct=p?Math.min((fa/p)*100,100):0;const ov=p&&fa>p;
       html+=`<div style="margin-bottom:10px;"><div class="split"><span style="font-size:12px;">${c.n}</span><span style="font-size:12px;font-weight:700;color:${ov?'var(--rd)':'var(--tx)'};">${f(fa)}${p?' / <span style="color:var(--mu)">'+f(p)+'</span>':''}</span></div>${p?`<div class="pb mt8"><div class="pf" style="width:${pct}%;background:${ov?'var(--rd)':'var(--bl)'}"></div></div>`:''}</div>`;
     }
-    el.innerHTML=html||'<div class="empty">?? Немає даних за цей місяць</div>';
+    el.innerHTML=html||'<div class="empty">📭 Немає даних за цей місяць</div>';
   }catch(e){el.innerHTML=`<div class="empty" style="color:var(--rd)">${e.message}</div>`;}
 }
 
@@ -441,7 +441,7 @@ async function loadDRecent(){
   const el=document.getElementById('dRecent');
   try{
     const txs=await getTx({});
-    if(!txs.length){el.innerHTML='<div class="empty">?? Записів немає</div>';return;}
+    if(!txs.length){el.innerHTML='<div class="empty">📭 Записів немає</div>';return;}
     el.innerHTML=txHtml(txs.slice(0,8),false);
   }catch(e){el.innerHTML=`<div class="empty" style="color:var(--rd)">${e.message}</div>`;}
 }
@@ -462,7 +462,7 @@ async function loadBalChart(){
   }catch(e){}
 }
 
-// ??? JOURNAL ???
+// ═══ JOURNAL ═══
 function initJournal(){
   const today=td();
   document.getElementById('qDate').value=today; document.getElementById('mDate').value=today;
@@ -497,7 +497,7 @@ async function mInfo(){
   const ac=INC_MAP[cat];
   if(t==='income'&&ac){
     const astBal=await getAstCalculated(); const bal=astBal[ac]||0;
-    b.style.display='block';b.innerHTML=`?? Доступно у ${AN[ac]}: <strong style="color:var(--gd);">${f(bal)}</strong>`;
+    b.style.display='block';b.innerHTML=`💡 Доступно у ${AN[ac]}: <strong style="color:var(--gd);">${f(bal)}</strong>`;
   }else b.style.display='none';
 }
 
@@ -510,19 +510,19 @@ async function qadd(){
       const curBal = await calcCurrentGlobalBalance();
       if(amount > curBal){
         toast('Операція перевищує поточний баланс!','fail');
-        btn.disabled=false;btn.textContent='Зберегти ?';
+        btn.disabled=false;btn.textContent='Зберегти ↵';
         return;
       }
     }
     const ac=INC_MAP[cat];
-    if(type==='income'&&ac){const ok=await chkBal(ac,amount);if(!ok){btn.disabled=false;btn.textContent='Зберегти ?';return;}}
+    if(type==='income'&&ac){const ok=await chkBal(ac,amount);if(!ok){btn.disabled=false;btn.textContent='Зберегти ↵';return;}}
     await addTx({date,category_id:cat,amount:Math.abs(amount),note,type});
     document.getElementById('qAmt').value='';document.getElementById('qNote').value='';
-    toast('Записано ?');
+    toast('Записано ✓');
     await loadTx();
     if(document.getElementById('pg-dash').classList.contains('on'))loadDash();
   }catch(e){toast('Помилка: '+e.message,'fail');}
-  btn.disabled=false;btn.textContent='Зберегти ?';
+  btn.disabled=false;btn.textContent='Зберегти ↵';
 }
 
 async function loadTx(){
@@ -536,7 +536,7 @@ async function loadTx(){
     let str=[];
     if(expT)str.push(`Витрати: ${f(expT)}`); if(incT)str.push(`Дохід/Кредит: ${f(incT)}`); if(invT)str.push(`Інвест: ${f(invT)}`);
     document.getElementById('txTot').innerHTML=str.join(' | ');
-    if(!txs.length){el.innerHTML='<div class="empty">?? Записів немає</div>';return;}
+    if(!txs.length){el.innerHTML='<div class="empty">📭 Записів немає</div>';return;}
     el.innerHTML=txHtml(txs,true);
   }catch(e){el.innerHTML=`<div class="empty" style="color:var(--rd)">${e.message}</div>`;}
 }
@@ -547,7 +547,7 @@ function txHtml(txs,showDel){
       <td>${fd(t.date)}</td><td>${tbadge(t.type)}</td><td>${cn(t.category_id)}</td>
       <td style="font-weight:700;color:${typeColor(t.type)};">${f(Math.abs(t.amount))}</td>
       <td class="mu">${t.note||''}</td>
-      <td><button class="btn bd bic bsm" onclick="rmTx('${t.id}','${t.type}','${t.category_id}',${t.amount})">??</button></td>
+      <td><button class="btn bd bic bsm" onclick="rmTx('${t.id}','${t.type}','${t.category_id}',${t.amount})">🗑</button></td>
     </tr>`).join('')}
   </tbody></table>`;
 }
@@ -593,7 +593,7 @@ async function saveTx(){
     await addTx({date,category_id:cat,amount:Math.abs(amount),note,type});
     closeM();
     document.getElementById('mAmt').value='';document.getElementById('mNote').value='';
-    toast('Збережено ?');
+    toast('Збережено ✓');
     if(document.getElementById('pg-journal').classList.contains('on'))await loadTx();
     if(document.getElementById('pg-week').classList.contains('on'))loadWeek();
     if(document.getElementById('pg-assets').classList.contains('on'))loadAssets();
@@ -604,11 +604,11 @@ async function saveTx(){
 
 async function chkBal(cat,amount){
   const astBal=await getAstCalculated(); const bal=astBal[cat]||0;
-  if(amount>bal){toast(`? Недостатньо! ${AN[cat]}: є ${f(bal)}`,'fail');return false;}
+  if(amount>bal){toast(`❌ Недостатньо! ${AN[cat]}: є ${f(bal)}`,'fail');return false;}
   return true;
 }
 
-// ??? BUDGET ???
+// ═══ BUDGET ═══
 function updBLbl(){document.getElementById('bLbl').textContent=MUA[bM]+' '+bY;}
 function bNav(d) {
   const nm=bM+d;if(nm<0){bM=11;bY--;}else if(nm>11){bM=0;bY++;}else bM=nm;
@@ -625,7 +625,7 @@ async function loadBud(){
     const iF=txs.filter(t=>t.type==='income'||t.type==='inc_credit').reduce((s,t)=>s+nu(t.amount),0);
     const iP=np(bud,'inc_plan') || 0;
     
-    let html=`<table><thead><tr><th>Категорія</th><th>План ?</th><th>Дата платежу</th><th>Fact ?</th><th>Різниця</th><th>%</th></tr></thead><tbody>`;
+    let html=`<table><thead><tr><th>Категорія</th><th>План ₴</th><th>Дата платежу</th><th>Fact ₴</th><th>Різниця</th><th>%</th></tr></thead><tbody>`;
     const getTargetDate = (catId) => {
        const item = bud.find(b=>b.category_id===catId);
        return item ? (item.payment_date || '') : '';
@@ -634,10 +634,10 @@ async function loadBud(){
     let iDiffHtml = '—';
     if(iP > 0 || iF > 0) {
        const dInc = Math.abs(iF - iP);
-       iDiffHtml = f(dInc) + (iF >= iP ? ' ?' : ' ?');
+       iDiffHtml = f(dInc) + (iF >= iP ? ' ✓' : ' ↓');
     }
     
-    html+=`<tr><td>?? Дохід / Кредит</td>
+    html+=`<tr><td>💰 Дохід / Кредит</td>
       <td><input class="fi bfi" style="width:90px;" type="number" min="0" value="${iP>0?iP:''}" placeholder="0" onchange="saveBud(${y},${m},'inc_plan','plan',this.value)"></td>
       <td><input class="fi" style="width:125px;" type="date" value="${getTargetDate('inc_plan')}" onchange="saveBud(${y},${m},'inc_plan','payment_date',this.value)"></td>
       <td style="font-weight:700;color:var(--ac);">${iF>0?f(iF):'—'}</td>
@@ -662,7 +662,7 @@ async function loadBud(){
       
       let diffHtml = '—';
       if(p > 0 || fa > 0) {
-        diffHtml = f(Math.abs(diff)) + (diff >= 0 ? ' ?' : ' ?');
+        diffHtml = f(Math.abs(diff)) + (diff >= 0 ? ' ✓' : ' ↑');
       }
       
       html+=`<tr><td>${c.n}</td>
@@ -675,7 +675,7 @@ async function loadBud(){
     
     let tDiffHtml = '';
     if(tp > 0 || tf > 0) {
-      tDiffHtml = f(Math.abs(tp - tf)) + (tp - tf >= 0 ? ' ?' : ' ?');
+      tDiffHtml = f(Math.abs(tp - tf)) + (tp - tf >= 0 ? ' ✓' : ' ↑');
     }
     
     html+=`</tbody><tfoot><tr class="tr"><td>РАЗОМ плани</td><td>${f(tp)}</td><td>—</td><td style="color:${tf>tp&&tp>0?'var(--rd)':'var(--tx)'};">${f(tf)}</td><td style="color:${tp-tf>=0?'var(--ac)':'var(--rd)'};">${tDiffHtml}</td><td></td></tr></tfoot></table>`;
@@ -718,7 +718,7 @@ async function saveBud(y,m,catId,field,val){
   }catch(e){toast('Помилка збереження','fail');}
 }
 
-// ??? WEEK ???
+// ═══ WEEK ═══
 function wkDays(off=0){
   const now=new Date();const dow=now.getDay()||7;
   const mon=new Date(now);mon.setDate(now.getDate()-dow+1+off*7);
@@ -762,7 +762,7 @@ function renderWeekList(){
     totPlan = _wBud.filter(b=>b.category_id!=='inc_plan').reduce((s,b)=>s+nu(b.plan)/4.33,0);
   }
 
-  let planHtml = `<div style="font-weight:700;margin-bottom:8px;">${wDay?`?? ${fd(wDay)} — `:''} Факт витрат: <span style="color:${totF>totPlan&&totPlan?'var(--rd)':'var(--ac)'};">${f(totF)}</span> / План: ${f(totPlan)}</div>`;
+  let planHtml = `<div style="font-weight:700;margin-bottom:8px;">${wDay?`📅 ${fd(wDay)} — `:''} Факт витрат: <span style="color:${totF>totPlan&&totPlan?'var(--rd)':'var(--ac)'};">${f(totF)}</span> / План: ${f(totPlan)}</div>`;
   
   const combinedCats = [...CE, ...CV, ...CCR];
   let catsHtml = '';
@@ -798,14 +798,14 @@ function renderWeekList(){
 
   const listEl=document.getElementById('wList');
   let html='';
-  if(wDay) html+=`<div style="font-size:11px;color:var(--mu);margin-bottom:8px;">?? Огляд дня: ${fd(wDay)} <button class="btn bs bsm" onclick="wDay=null;loadWeek()">? Повернутись до тижня</button></div>`;
+  if(wDay) html+=`<div style="font-size:11px;color:var(--mu);margin-bottom:8px;">📅 Огляд дня: ${fd(wDay)} <button class="btn bs bsm" onclick="wDay=null;loadWeek()">✕ Повернутись до тижня</button></div>`;
 
   const activeCategories = wDay 
     ? [...new Set([...filtered.filter(t=>t.type==='expense'||t.type==='exp_credit'||t.type==='invest').map(t=>t.category_id), ..._wBud.filter(b=>b.payment_date===wDay).map(b=>b.category_id)])]
     : [...new Set([...filtered.filter(t=>t.type==='expense'||t.type==='exp_credit'||t.type==='invest').map(t=>t.category_id), ..._wBud.filter(b=>b.category_id!=='inc_plan').map(b=>b.category_id)])];
 
-  html+=`<table><thead><tr><th>Категорія</th><th>План ?</th><th>Факт ?</th></tr></thead><tbody>`;
-  html+=`<tr class="tr"><td>?? ВСЬОГО</td><td>${f(totPlan)}</td><td style="color:${totF>totPlan&&totPlan?'var(--rd)':'var(--ac)'};">${f(totF)}</td></tr>`;
+  html+=`<table><thead><tr><th>Категорія</th><th>План ₴</th><th>Факт ₴</th></tr></thead><tbody>`;
+  html+=`<tr class="tr"><td>📊 ВСЬОГО</td><td>${f(totPlan)}</td><td style="color:${totF>totPlan&&totPlan?'var(--rd)':'var(--ac)'};">${f(totF)}</td></tr>`;
   
   activeCategories.forEach(cid => {
     const c=combinedCats.find(x=>x.id===cid); if(!c) return;
@@ -824,7 +824,7 @@ function renderWeekList(){
   listEl.innerHTML=html;
 }
 
-// ??? ASSETS ???
+// ═══ ASSETS ═══
 async function loadAssets(){
   try {
     const fM=document.getElementById('aFM')?.value;
@@ -835,12 +835,12 @@ async function loadAssets(){
     const netAssets = totOwn - credit;
 
     document.getElementById('aCards').innerHTML=`
-      <div class="card o"><div class="ci">??</div><div class="cl">Долар USD (в ?)</div><div class="cv o">${f(usd)}</div></div>
-      <div class="card b"><div class="ci">??</div><div class="cl">Євро EUR (в ?)</div><div class="cv b">${f(eur)}</div></div>
-      <div class="card g"><div class="ci">??</div><div class="cl">ОВДП Portfolio</div><div class="cv g">${f(ovdp)}</div></div>
-      <div class="card"><div class="ci">??</div><div class="cl">Депозити</div><div class="cv b">${f(dep)}</div></div>
-      <div class="card r"><div class="ci">??</div><div class="cl">Поточний Кредитний Борг</div><div class="cv r">${f(credit)}</div></div>
-      <div class="card p"><div class="ci">?</div><div class="cl">Чистий Капітал (Власні)</div><div class="cv p">${f(netAssets)}</div></div>`;
+      <div class="card o"><div class="ci">💵</div><div class="cl">Долар USD (в ₴)</div><div class="cv o">${f(usd)}</div></div>
+      <div class="card b"><div class="ci">💶</div><div class="cl">Євро EUR (в ₴)</div><div class="cv b">${f(eur)}</div></div>
+      <div class="card g"><div class="ci">📄</div><div class="cl">ОВДП Portfolio</div><div class="cv g">${f(ovdp)}</div></div>
+      <div class="card"><div class="ci">🏛</div><div class="cl">Депозити</div><div class="cv b">${f(dep)}</div></div>
+      <div class="card r"><div class="ci">💳</div><div class="cl">Поточний Кредитний Борг</div><div class="cv r">${f(credit)}</div></div>
+      <div class="card p"><div class="ci">∑</div><div class="cl">Чистий Капітал (Власні)</div><div class="cv p">${f(netAssets)}</div></div>`;
 
     const rBlock=(elId,catKeys,label,actualCurrentBalance,isCreditBlock=false)=>{
       let txs=txAll.filter(t=>{
@@ -860,7 +860,7 @@ async function loadAssets(){
         <span style="font-weight:700;">${label}</span>
         <span style="font-weight:800;color:${isCreditBlock?'var(--rd)':'var(--gd)'};font-size:15px;">${f(actualCurrentBalance)}</span>
       </div>`;
-      if(!txs.length) h+=`<div class="empty">?? Немає операцій за період.</div>`;
+      if(!txs.length) h+=`<div class="empty">📭 Немає операцій за період.</div>`;
       else{
         h+=`<div class="alog" style="padding:8px 14px;">`;
         txs.forEach(t=>{
@@ -873,14 +873,14 @@ async function loadAssets(){
       }
       el.innerHTML=h;
     };
-    rBlock('aUSD',['usd','eur'],'?? Долар & ?? Євро Активи', usd+eur);
-    rBlock('aOVDP',['ovdp'],'?? ОВДП Борд', ovdp);
+    rBlock('aUSD',['usd','eur'],'💵 Долар & 💶 Євро Активи', usd+eur);
+    rBlock('aOVDP',['ovdp'],'📄 ОВДП Борд', ovdp);
     
     // В останній блок суміщаємо депозити та кредитну історію
     const elDep = document.getElementById('aDep');
     elDep.innerHTML = `<div id="sub_dep"></div><div id="sub_credit" style="border-top:1px solid var(--bd); margin-top:8px;"></div>`;
-    rBlock('sub_dep',['deposit'],'?? Депозитні рахунки', dep);
-    rBlock('sub_credit',[],'?? Кредитна лінія / Борги', credit, true);
+    rBlock('sub_dep',['deposit'],'🏛 Депозитні рахунки', dep);
+    rBlock('sub_credit',[],'💳 Кредитна лінія / Борги', credit, true);
 
     if(chAst)chAst.destroy();
     if(netAssets>0 || credit>0) {
@@ -889,7 +889,7 @@ async function loadAssets(){
   }catch(e){console.error(e);}
 }
 
-// ??? ANALYTICS ???
+// ═══ ANALYTICS ═══
 async function loadAnalytics(){
   try{
     const[txsAll,astBal]=await Promise.all([allTx(),getAstCalculated()]);
@@ -904,17 +904,17 @@ async function loadAnalytics(){
     const totOwn = astBal.usd + astBal.eur + astBal.ovdp + astBal.deposit;
     
     document.getElementById('anCards').innerHTML=`
-      <div class="card g"><div class="ci">??</div><div class="cl">Надходження (Дохід+Кредит)</div><div class="cv g">${f(inc)}</div></div>
-      <div class="card r"><div class="ci">??</div><div class="cl">Витрати (Свої+Погашення)</div><div class="cv r">${f(exp)}</div></div>
-      <div class="card o"><div class="ci">??</div><div class="cl">Інвестовано за період</div><div class="cv o">${f(inv)}</div></div>
-      <div class="card ${bal>=0?'g':'r'}"><div class="ci">??</div><div class="cl">Чисте Сальдо періоду</div><div class="cv ${bal>=0?'g':'r'}">${f(bal)}</div></div>`;
+      <div class="card g"><div class="ci">💵</div><div class="cl">Надходження (Дохід+Кредит)</div><div class="cv g">${f(inc)}</div></div>
+      <div class="card r"><div class="ci">📤</div><div class="cl">Витрати (Свої+Погашення)</div><div class="cv r">${f(exp)}</div></div>
+      <div class="card o"><div class="ci">🏦</div><div class="cl">Інвестовано за період</div><div class="cv o">${f(inv)}</div></div>
+      <div class="card ${bal>=0?'g':'r'}"><div class="ci">⚖️</div><div class="cl">Чисте Сальдо періоду</div><div class="cv ${bal>=0?'g':'r'}">${f(bal)}</div></div>`;
       
     document.getElementById('anAst').innerHTML=`<div class="cards" style="margin-bottom:0;">
-      <div class="card o"><div class="cl">?? Доларів в ?</div><div class="cv o">${f(astBal.usd)}</div></div>
-      <div class="card b"><div class="cl">?? Євро в ?</div><div class="cv b">${f(astBal.eur)}</div></div>
-      <div class="card g"><div class="cl">?? ОВДП активи</div><div class="cv g">${f(astBal.ovdp)}</div></div>
-      <div class="card"><div class="cl">?? Депозити</div><div class="cv b">${f(astBal.deposit)}</div></div>
-      <div class="card p"><div class="cl">?? Загальний Кредитний Борг</div><div class="cv p">${f(astBal.credit)}</div></div>
+      <div class="card o"><div class="cl">💵 Доларів в ₴</div><div class="cv o">${f(astBal.usd)}</div></div>
+      <div class="card b"><div class="cl">💶 Євро в ₴</div><div class="cv b">${f(astBal.eur)}</div></div>
+      <div class="card g"><div class="cl">📄 ОВДП активи</div><div class="cv g">${f(astBal.ovdp)}</div></div>
+      <div class="card"><div class="cl">🏛 Депозити</div><div class="cv b">${f(astBal.deposit)}</div></div>
+      <div class="card p"><div class="cl">💳 Загальний Кредитний Борг</div><div class="cv p">${f(astBal.credit)}</div></div>
     </div>`;
     
     const months=[];
@@ -937,8 +937,8 @@ async function loadAnalytics(){
 }
 function setPer(p,btn){anPer=p;document.querySelectorAll('#anTabs .ptab').forEach(b=>b.classList.remove('on'));btn.classList.add('on');loadAnalytics();}
 
-// ??? UTILS ???
-function f(n){return Number(n||0).toLocaleString('uk-UA',{minimumFractionDigits:0,maximumFractionDigits:0})+' ?';}
+// ═══ UTILS ═══
+function f(n){return Number(n||0).toLocaleString('uk-UA',{minimumFractionDigits:0,maximumFractionDigits:0})+' ₴';}
 function fd(s){if(!s)return'';const d=new Date(s+'T00:00:00');return`${p2(d.getDate())}.${p2(d.getMonth()+1)}.${d.getFullYear()}`;}
 function td(){return new Date().toISOString().slice(0,10);}
 function ym(y,m){return`${y}-${p2(m+1)}`;}
@@ -957,7 +957,7 @@ function mkBar(id,labels,datasets){
 }
 function toast(msg,type='ok'){const el=document.getElementById('toast');el.textContent=msg;el.className=`toast ${type} on`;setTimeout(()=>el.classList.remove('on'),3000);}
 
-// ??? INIT ???
+// ═══ INIT ═══
 document.addEventListener('DOMContentLoaded',()=>{
   updDLbl();updBLbl();updWLbl();
   loadDash();
